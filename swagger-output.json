@@ -1,0 +1,1923 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "My Screct Cookbook API",
+    "description": "我的秘密食譜 API",
+    "version": "1.0.0"
+  },
+  "host": "https://mysecretcookbook_backend.onrender.com",
+  "basePath": "/",
+  "schemes": [
+    "http",
+    "https"
+  ],
+  "securityDefinitions": {
+    "Bearer": {
+      "type": "apiKey",
+      "in": "headers",
+      "name": "authorization",
+      "description": "請加上 JWT Token"
+    }
+  },
+  "consumes": [
+    "application/json"
+  ],
+  "paths": {
+    "/recipes": {
+      "get": {
+        "tags": [
+          "Recipe 食譜 - 管理員"
+        ],
+        "summary": "取得所有食譜",
+        "description": "取得所有食譜 - 需管理員權限",
+        "parameters": [
+          {
+            "name": "authorization",
+            "in": "header",
+            "type": "string"
+          },
+          {
+            "name": "keyword",
+            "in": "query",
+            "type": "string",
+            "description": "關鍵字搜尋"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "回傳成功",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "status": {
+                  "type": "string",
+                  "example": "success"
+                },
+                "data": {
+                  "type": "array",
+                  "items": {
+                    "type": "object",
+                    "properties": {
+                      "title": {
+                        "type": "string",
+                        "example": "金針菇煎蛋"
+                      },
+                      "image": {
+                        "type": "string",
+                        "example": "https://i.imgur.com/vpQY28H.jpg"
+                      },
+                      "description": {
+                        "type": "string",
+                        "example": "輕鬆不失敗煎蛋，簡單開胃。"
+                      },
+                      "steps": {
+                        "type": "array",
+                        "items": {
+                          "type": "object",
+                          "properties": {
+                            "stepNum": {
+                              "type": "number",
+                              "example": 2
+                            },
+                            "stepContent": {
+                              "type": "string",
+                              "example": "加入雞蛋，二面煎熟即可"
+                            },
+                            "_id": {
+                              "type": "string",
+                              "example": "65d8b4e3c6f5e8f6817425f6"
+                            }
+                          }
+                        }
+                      },
+                      "cookingTime": {
+                        "type": "string",
+                        "example": "10 分鐘"
+                      },
+                      "ingredients": {
+                        "type": "array",
+                        "items": {
+                          "type": "object",
+                          "properties": {
+                            "ingredientName": {
+                              "type": "string",
+                              "example": "雞蛋"
+                            },
+                            "ingredientQty": {
+                              "type": "string",
+                              "example": "2 顆"
+                            },
+                            "_id": {
+                              "type": "string",
+                              "example": "65d8b4e3c6f5e8f6817425f7"
+                            }
+                          }
+                        }
+                      },
+                      "user": {
+                        "type": "object",
+                        "properties": {
+                          "_id": {
+                            "type": "string",
+                            "example": "65d8493c1da1cd1c19f57f3e"
+                          },
+                          "name": {
+                            "type": "string",
+                            "example": "Vance"
+                          },
+                          "avatar": {
+                            "type": "string",
+                            "example": "https://i.imgur.com/vpQY28H.jpg"
+                          }
+                        }
+                      },
+                      "_id": {
+                        "type": "string",
+                        "example": "65d8b4e3c6f5e8f6817425f4"
+                      },
+                      "createdAt": {
+                        "type": "string",
+                        "example": "2024-02-23T15:08:19.694Z"
+                      },
+                      "updatedAt": {
+                        "type": "string",
+                        "example": "2024-02-23T15:08:19.694Z"
+                      }
+                    }
+                  }
+                }
+              },
+              "xml": {
+                "name": "main"
+              }
+            }
+          },
+          "400": {
+            "description": "回傳失敗",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "status": {
+                  "type": "string",
+                  "example": "error"
+                },
+                "message": {
+                  "type": "string",
+                  "example": "取得所有食譜失敗"
+                }
+              },
+              "xml": {
+                "name": "main"
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "Bearer": []
+          }
+        ]
+      },
+      "delete": {
+        "tags": [
+          "Recipe 食譜 - 管理員"
+        ],
+        "summary": "刪除所有食譜",
+        "description": "刪除所有食譜 - 需管理員權限",
+        "parameters": [
+          {
+            "name": "authorization",
+            "in": "header",
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "回傳成功",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "status": {
+                  "type": "string",
+                  "example": "success"
+                },
+                "data": {
+                  "type": "array",
+                  "example": [],
+                  "items": {}
+                }
+              },
+              "xml": {
+                "name": "main"
+              }
+            }
+          },
+          "400": {
+            "description": "回傳失敗",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "status": {
+                  "type": "string",
+                  "example": "error"
+                },
+                "message": {
+                  "type": "string",
+                  "example": "刪除所有食譜失敗失敗"
+                }
+              },
+              "xml": {
+                "name": "main"
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "Bearer": []
+          }
+        ]
+      }
+    },
+    "/recipes/user/{userId}": {
+      "get": {
+        "tags": [
+          "Recipe 食譜"
+        ],
+        "summary": "取得指定會員所有食譜",
+        "description": "取得指定會員所有食譜 - 需管理員權限",
+        "parameters": [
+          {
+            "name": "userId",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "authorization",
+            "in": "header",
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "回傳成功",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "status": {
+                  "type": "string",
+                  "example": "success"
+                },
+                "data": {
+                  "type": "array",
+                  "items": {
+                    "type": "object",
+                    "properties": {
+                      "_id": {
+                        "type": "string",
+                        "example": "65d84d4a86dd40e016997a8c"
+                      },
+                      "title": {
+                        "type": "string",
+                        "example": "酥炸洋蔥圈"
+                      },
+                      "image": {
+                        "type": "string",
+                        "example": "https://i.imgur.com/vpQY28H.jpg"
+                      },
+                      "description": {
+                        "type": "string",
+                        "example": "酥炸洋蔥圈濃厚香氣、酥脆的外皮"
+                      },
+                      "steps": {
+                        "type": "array",
+                        "items": {
+                          "type": "object",
+                          "properties": {
+                            "stepNum": {
+                              "type": "number",
+                              "example": 2
+                            },
+                            "stepContent": {
+                              "type": "string",
+                              "example": "中火加熱至油溫約 160 度將洋蔥放入，炸至二面酥脆金黃即可夾出瀝油"
+                            },
+                            "_id": {
+                              "type": "string",
+                              "example": "65d84d4a86dd40e016997a8e"
+                            }
+                          }
+                        }
+                      },
+                      "cookingTime": {
+                        "type": "string",
+                        "example": "5 分鐘"
+                      },
+                      "ingredients": {
+                        "type": "array",
+                        "items": {
+                          "type": "object",
+                          "properties": {
+                            "ingredientName": {
+                              "type": "string",
+                              "example": "雞蛋"
+                            },
+                            "ingredientQty": {
+                              "type": "string",
+                              "example": "1 顆"
+                            },
+                            "_id": {
+                              "type": "string",
+                              "example": "65d8b4e3c6f5e8f6817425f7"
+                            }
+                          }
+                        }
+                      },
+                      "user": {
+                        "type": "object",
+                        "properties": {
+                          "_id": {
+                            "type": "string",
+                            "example": "65d433ec0e39d8dcfd678a59"
+                          },
+                          "name": {
+                            "type": "string",
+                            "example": "Carl"
+                          },
+                          "avatar": {
+                            "type": "string",
+                            "example": "https://i.imgur.com/vpQY28H.jpg"
+                          }
+                        }
+                      },
+                      "createdAt": {
+                        "type": "string",
+                        "example": "2024-02-23T07:46:18.817Z"
+                      },
+                      "updatedAt": {
+                        "type": "string",
+                        "example": "2024-02-23T07:46:18.817Z"
+                      }
+                    }
+                  }
+                }
+              },
+              "xml": {
+                "name": "main"
+              }
+            }
+          },
+          "400": {
+            "description": "回傳失敗",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "status": {
+                  "type": "string",
+                  "example": "error"
+                },
+                "message": {
+                  "type": "string",
+                  "example": "取得所有食譜失敗"
+                }
+              },
+              "xml": {
+                "name": "main"
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "Bearer": []
+          }
+        ]
+      },
+      "delete": {
+        "tags": [
+          "Recipe 食譜"
+        ],
+        "summary": "刪除指定會員所有食譜",
+        "description": "刪除指定會員所有食譜",
+        "parameters": [
+          {
+            "name": "userId",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "authorization",
+            "in": "header",
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "回傳成功",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "status": {
+                  "type": "string",
+                  "example": "success"
+                },
+                "data": {
+                  "type": "array",
+                  "example": [],
+                  "items": {}
+                }
+              },
+              "xml": {
+                "name": "main"
+              }
+            }
+          },
+          "400": {
+            "description": "回傳失敗",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "status": {
+                  "type": "string",
+                  "example": "error"
+                },
+                "message": {
+                  "type": "string",
+                  "example": "刪除指定會員所有食譜失敗"
+                }
+              },
+              "xml": {
+                "name": "main"
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "Bearer": []
+          }
+        ]
+      }
+    },
+    "/recipe/{recipeId}": {
+      "get": {
+        "tags": [
+          "Recipe 食譜"
+        ],
+        "summary": "取得指定食譜",
+        "description": "取得指定食譜 - 需管理員權限",
+        "parameters": [
+          {
+            "name": "recipeId",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "authorization",
+            "in": "header",
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "回傳成功",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "status": {
+                  "type": "string",
+                  "example": "success"
+                },
+                "data": {
+                  "type": "object",
+                  "properties": {
+                    "_id": {
+                      "type": "string",
+                      "example": "65d84d4a86dd40e016997a8c"
+                    },
+                    "title": {
+                      "type": "string",
+                      "example": "酥炸洋蔥圈"
+                    },
+                    "image": {
+                      "type": "string",
+                      "example": "https://i.imgur.com/vpQY28H.jpg"
+                    },
+                    "description": {
+                      "type": "string",
+                      "example": "酥炸洋蔥圈濃厚香氣、酥脆的外皮"
+                    },
+                    "steps": {
+                      "type": "array",
+                      "items": {
+                        "type": "object",
+                        "properties": {
+                          "stepNum": {
+                            "type": "number",
+                            "example": 2
+                          },
+                          "stepContent": {
+                            "type": "string",
+                            "example": "中火加熱至油溫約 160 度將洋蔥放入，炸至二面酥脆金黃即可夾出瀝油"
+                          },
+                          "_id": {
+                            "type": "string",
+                            "example": "65d84d4a86dd40e016997a8e"
+                          }
+                        }
+                      }
+                    },
+                    "cookingTime": {
+                      "type": "string",
+                      "example": "5 分鐘"
+                    },
+                    "ingredients": {
+                      "type": "array",
+                      "items": {
+                        "type": "object",
+                        "properties": {
+                          "ingredientName": {
+                            "type": "string",
+                            "example": "雞蛋"
+                          },
+                          "ingredientQty": {
+                            "type": "string",
+                            "example": "1 顆"
+                          },
+                          "_id": {
+                            "type": "string",
+                            "example": "65d8b4e3c6f5e8f6817425f7"
+                          }
+                        }
+                      }
+                    },
+                    "user": {
+                      "type": "object",
+                      "properties": {
+                        "_id": {
+                          "type": "string",
+                          "example": "65d433ec0e39d8dcfd678a59"
+                        },
+                        "name": {
+                          "type": "string",
+                          "example": "Carl"
+                        },
+                        "avatar": {
+                          "type": "string",
+                          "example": "https://i.imgur.com/vpQY28H.jpg"
+                        }
+                      }
+                    },
+                    "createdAt": {
+                      "type": "string",
+                      "example": "2024-02-23T07:46:18.817Z"
+                    },
+                    "updatedAt": {
+                      "type": "string",
+                      "example": "2024-02-23T07:46:18.817Z"
+                    }
+                  }
+                }
+              },
+              "xml": {
+                "name": "main"
+              }
+            }
+          },
+          "400": {
+            "description": "回傳失敗",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "status": {
+                  "type": "string",
+                  "example": "error"
+                },
+                "message": {
+                  "type": "string",
+                  "example": "取得指定食譜失敗"
+                }
+              },
+              "xml": {
+                "name": "main"
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "Bearer": []
+          }
+        ]
+      },
+      "patch": {
+        "tags": [
+          "Recipe 食譜"
+        ],
+        "summary": "修改食譜",
+        "description": "修改食譜",
+        "parameters": [
+          {
+            "name": "recipeId",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "authorization",
+            "in": "header",
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "回傳成功",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "status": {
+                  "type": "string",
+                  "example": "success"
+                },
+                "data": {
+                  "type": "object",
+                  "properties": {
+                    "_id": {
+                      "type": "string",
+                      "example": "65d84d4a86dd40e016997a8c"
+                    },
+                    "title": {
+                      "type": "string",
+                      "example": "酥炸洋蔥圈"
+                    },
+                    "image": {
+                      "type": "string",
+                      "example": "https://i.imgur.com/vpQY28H.jpg"
+                    },
+                    "description": {
+                      "type": "string",
+                      "example": "酥炸洋蔥圈濃厚香氣、酥脆的外皮"
+                    },
+                    "steps": {
+                      "type": "array",
+                      "items": {
+                        "type": "object",
+                        "properties": {
+                          "stepNum": {
+                            "type": "number",
+                            "example": 2
+                          },
+                          "stepContent": {
+                            "type": "string",
+                            "example": "中火加熱至油溫約 160 度將洋蔥放入，炸至二面酥脆金黃即可夾出瀝油"
+                          },
+                          "_id": {
+                            "type": "string",
+                            "example": "65d84d4a86dd40e016997a8e"
+                          }
+                        }
+                      }
+                    },
+                    "cookingTime": {
+                      "type": "string",
+                      "example": "5 分鐘"
+                    },
+                    "ingredients": {
+                      "type": "array",
+                      "items": {
+                        "type": "object",
+                        "properties": {
+                          "ingredientName": {
+                            "type": "string",
+                            "example": "雞蛋"
+                          },
+                          "ingredientQty": {
+                            "type": "string",
+                            "example": "1 顆"
+                          },
+                          "_id": {
+                            "type": "string",
+                            "example": "65d8b4e3c6f5e8f6817425f7"
+                          }
+                        }
+                      }
+                    },
+                    "user": {
+                      "type": "string",
+                      "example": "65d433ec0e39d8dcfd678a59"
+                    },
+                    "createdAt": {
+                      "type": "string",
+                      "example": "2024-02-23T07:46:18.817Z"
+                    },
+                    "updatedAt": {
+                      "type": "string",
+                      "example": "2024-02-23T07:46:18.817Z"
+                    }
+                  }
+                }
+              },
+              "xml": {
+                "name": "main"
+              }
+            }
+          },
+          "400": {
+            "description": "回傳失敗",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "status": {
+                  "type": "string",
+                  "example": "error"
+                },
+                "message": {
+                  "type": "string",
+                  "example": "修改食譜失敗"
+                }
+              },
+              "xml": {
+                "name": "main"
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "Bearer": []
+          }
+        ]
+      },
+      "delete": {
+        "tags": [
+          "Recipe 食譜"
+        ],
+        "summary": "刪除指定食譜",
+        "description": "刪除指定食譜",
+        "parameters": [
+          {
+            "name": "recipeId",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "authorization",
+            "in": "header",
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "回傳成功",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "status": {
+                  "type": "string",
+                  "example": "success"
+                },
+                "data": {
+                  "type": "object",
+                  "properties": {
+                    "_id": {
+                      "type": "string",
+                      "example": "65d84d4a86dd40e016997a8c"
+                    },
+                    "title": {
+                      "type": "string",
+                      "example": "酥炸洋蔥圈"
+                    },
+                    "image": {
+                      "type": "string",
+                      "example": "https://i.imgur.com/vpQY28H.jpg"
+                    },
+                    "description": {
+                      "type": "string",
+                      "example": "酥炸洋蔥圈濃厚香氣、酥脆的外皮"
+                    },
+                    "steps": {
+                      "type": "array",
+                      "items": {
+                        "type": "object",
+                        "properties": {
+                          "stepNum": {
+                            "type": "number",
+                            "example": 2
+                          },
+                          "stepContent": {
+                            "type": "string",
+                            "example": "中火加熱至油溫約 160 度將洋蔥放入，炸至二面酥脆金黃即可夾出瀝油"
+                          },
+                          "_id": {
+                            "type": "string",
+                            "example": "65d84d4a86dd40e016997a8e"
+                          }
+                        }
+                      }
+                    },
+                    "cookingTime": {
+                      "type": "string",
+                      "example": "5 分鐘"
+                    },
+                    "ingredients": {
+                      "type": "array",
+                      "items": {
+                        "type": "object",
+                        "properties": {
+                          "ingredientName": {
+                            "type": "string",
+                            "example": "雞蛋"
+                          },
+                          "ingredientQty": {
+                            "type": "string",
+                            "example": "1 顆"
+                          },
+                          "_id": {
+                            "type": "string",
+                            "example": "65d8b4e3c6f5e8f6817425f7"
+                          }
+                        }
+                      }
+                    },
+                    "user": {
+                      "type": "string",
+                      "example": "65d433ec0e39d8dcfd678a59"
+                    },
+                    "createdAt": {
+                      "type": "string",
+                      "example": "2024-02-23T07:46:18.817Z"
+                    },
+                    "updatedAt": {
+                      "type": "string",
+                      "example": "2024-02-23T07:46:18.817Z"
+                    }
+                  }
+                }
+              },
+              "xml": {
+                "name": "main"
+              }
+            }
+          },
+          "400": {
+            "description": "回傳失敗",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "status": {
+                  "type": "string",
+                  "example": "error"
+                },
+                "message": {
+                  "type": "string",
+                  "example": "刪除單一食譜失敗"
+                }
+              },
+              "xml": {
+                "name": "main"
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "Bearer": []
+          }
+        ]
+      }
+    },
+    "/recipe": {
+      "post": {
+        "tags": [
+          "Recipe 食譜"
+        ],
+        "summary": "新增食譜",
+        "description": "新增食譜",
+        "parameters": [
+          {
+            "name": "authorization",
+            "in": "header",
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "回傳成功",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "status": {
+                  "type": "string",
+                  "example": "success"
+                },
+                "data": {
+                  "type": "object",
+                  "properties": {
+                    "_id": {
+                      "type": "string",
+                      "example": "65d84d4a86dd40e016997a8c"
+                    },
+                    "title": {
+                      "type": "string",
+                      "example": "酥炸洋蔥圈"
+                    },
+                    "image": {
+                      "type": "string",
+                      "example": "https://i.imgur.com/vpQY28H.jpg"
+                    },
+                    "description": {
+                      "type": "string",
+                      "example": "酥炸洋蔥圈濃厚香氣、酥脆的外皮"
+                    },
+                    "steps": {
+                      "type": "array",
+                      "items": {
+                        "type": "object",
+                        "properties": {
+                          "stepNum": {
+                            "type": "number",
+                            "example": 2
+                          },
+                          "stepContent": {
+                            "type": "string",
+                            "example": "中火加熱至油溫約 160 度將洋蔥放入，炸至二面酥脆金黃即可夾出瀝油"
+                          },
+                          "_id": {
+                            "type": "string",
+                            "example": "65d84d4a86dd40e016997a8e"
+                          }
+                        }
+                      }
+                    },
+                    "cookingTime": {
+                      "type": "string",
+                      "example": "5 分鐘"
+                    },
+                    "ingredients": {
+                      "type": "array",
+                      "items": {
+                        "type": "object",
+                        "properties": {
+                          "ingredientName": {
+                            "type": "string",
+                            "example": "雞蛋"
+                          },
+                          "ingredientQty": {
+                            "type": "string",
+                            "example": "1 顆"
+                          },
+                          "_id": {
+                            "type": "string",
+                            "example": "65d8b4e3c6f5e8f6817425f7"
+                          }
+                        }
+                      }
+                    },
+                    "user": {
+                      "type": "string",
+                      "example": "65d433ec0e39d8dcfd678a59"
+                    },
+                    "createdAt": {
+                      "type": "string",
+                      "example": "2024-02-23T07:46:18.817Z"
+                    },
+                    "updatedAt": {
+                      "type": "string",
+                      "example": "2024-02-23T07:46:18.817Z"
+                    }
+                  }
+                }
+              },
+              "xml": {
+                "name": "main"
+              }
+            }
+          },
+          "400": {
+            "description": "回傳失敗",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "status": {
+                  "type": "string",
+                  "example": "error"
+                },
+                "message": {
+                  "type": "string",
+                  "example": "新增食譜失敗"
+                }
+              },
+              "xml": {
+                "name": "main"
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "Bearer": []
+          }
+        ]
+      }
+    },
+    "/user/signUp": {
+      "post": {
+        "tags": [
+          "User 會員"
+        ],
+        "summary": "註冊",
+        "description": "註冊",
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "description": "資料格式",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "name": {
+                  "type": "string",
+                  "example": "Carl"
+                },
+                "email": {
+                  "type": "string",
+                  "example": "carl@mail.com"
+                },
+                "password": {
+                  "type": "string",
+                  "example": "Carl12345678"
+                }
+              },
+              "required": [
+                "name",
+                "email",
+                "password"
+              ]
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "回傳成功",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "status": {
+                  "type": "string",
+                  "example": "success"
+                },
+                "data": {
+                  "type": "object",
+                  "properties": {
+                    "token": {
+                      "type": "string",
+                      "example": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYyYTVhYTI0YWYxOGIyNzI5NmQ0MmE4MiIsImlhdCI6MTY1NTAyNDE2NCwiZXhwIjoxNjU1NjI4OTY0fQ.ylNUe_TfC7rqykZuJZdhOrp_oa4fKXwxniSrNk-SbhI"
+                    },
+                    "user": {
+                      "type": "object",
+                      "properties": {
+                        "_id": {
+                          "type": "string",
+                          "example": "62a5aa24af18b27296d42a82"
+                        },
+                        "name": {
+                          "type": "string",
+                          "example": "Carl"
+                        },
+                        "avatar": {
+                          "type": "string",
+                          "example": ""
+                        },
+                        "gender": {
+                          "type": "string",
+                          "example": "male"
+                        },
+                        "email": {
+                          "type": "string",
+                          "example": "carl@mail.com"
+                        }
+                      }
+                    }
+                  }
+                }
+              },
+              "xml": {
+                "name": "main"
+              }
+            }
+          },
+          "400": {
+            "description": "回傳失敗",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "status": {
+                  "type": "string",
+                  "example": "error"
+                },
+                "message": {
+                  "type": "string",
+                  "example": "註冊失敗"
+                }
+              },
+              "xml": {
+                "name": "main"
+              }
+            }
+          }
+        }
+      }
+    },
+    "/user/signIn": {
+      "post": {
+        "tags": [
+          "User 會員"
+        ],
+        "summary": "登入",
+        "description": "登入",
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "description": "資料格式",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "email": {
+                  "type": "string",
+                  "example": "carl@mail.com"
+                },
+                "password": {
+                  "type": "string",
+                  "example": "Carl12345678"
+                }
+              },
+              "required": [
+                "email",
+                "password"
+              ]
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "回傳成功",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "status": {
+                  "type": "string",
+                  "example": "success"
+                },
+                "data": {
+                  "type": "object",
+                  "properties": {
+                    "token": {
+                      "type": "string",
+                      "example": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYyYTRmYzExMTU3Mzg4NGRmMjYyMzRmNSIsImlhdCI6MTY1NTAyMjQwNywiZXhwIjoxNjU1NjI3MjA3fQ.VKQsd3wbvhPQHf1yrUQwg84K4n_ICEbg4DYA0shT-Ng"
+                    },
+                    "user": {
+                      "type": "object",
+                      "properties": {
+                        "_id": {
+                          "type": "string",
+                          "example": "62a4fc111573884df26234f5"
+                        },
+                        "name": {
+                          "type": "string",
+                          "example": "Carl"
+                        },
+                        "avatar": {
+                          "type": "string",
+                          "example": "https://i.imgur.com/vpQY28H.jpg"
+                        },
+                        "gender": {
+                          "type": "string",
+                          "example": "male"
+                        },
+                        "email": {
+                          "type": "string",
+                          "example": "carl@mail.com"
+                        }
+                      }
+                    }
+                  }
+                }
+              },
+              "xml": {
+                "name": "main"
+              }
+            }
+          },
+          "400": {
+            "description": "回傳失敗",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "status": {
+                  "type": "string",
+                  "example": "error"
+                },
+                "message": {
+                  "type": "string",
+                  "example": "登入失敗"
+                }
+              },
+              "xml": {
+                "name": "main"
+              }
+            }
+          }
+        }
+      }
+    },
+    "/user/updatePassword": {
+      "post": {
+        "tags": [
+          "User 會員"
+        ],
+        "summary": "重設密碼",
+        "description": "重設密碼",
+        "parameters": [
+          {
+            "name": "authorization",
+            "in": "header",
+            "type": "string"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "description": "資料格式",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "password": {
+                  "type": "string",
+                  "example": "Carl12345678"
+                },
+                "confirmPassword": {
+                  "type": "string",
+                  "example": "Carl12345678"
+                }
+              },
+              "required": [
+                "password",
+                "confirmPassword"
+              ]
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "回傳成功",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "status": {
+                  "type": "string",
+                  "example": "success"
+                },
+                "data": {
+                  "type": "object",
+                  "properties": {
+                    "token": {
+                      "type": "string",
+                      "example": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYyYTRmYzExMTU3Mzg4NGRmMjYyMzRmNSIsImlhdCI6MTY1NTAyNDUzNiwiZXhwIjoxNjU1NjI5MzM2fQ.4JE6hxIPx6yyneFLjxHLa1fHIXMgmJgOoJDGrynmOUM"
+                    },
+                    "user": {
+                      "type": "object",
+                      "properties": {
+                        "_id": {
+                          "type": "string",
+                          "example": "62a4fc111573884df26234f5"
+                        },
+                        "name": {
+                          "type": "string",
+                          "example": "Carl"
+                        },
+                        "avatar": {
+                          "type": "string",
+                          "example": "https://i.imgur.com/vpQY28H.jpg"
+                        },
+                        "gender": {
+                          "type": "string",
+                          "example": "male"
+                        },
+                        "email": {
+                          "type": "string",
+                          "example": "carl@mail.com"
+                        }
+                      }
+                    }
+                  }
+                }
+              },
+              "xml": {
+                "name": "main"
+              }
+            }
+          },
+          "400": {
+            "description": "回傳失敗",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "status": {
+                  "type": "string",
+                  "example": "error"
+                },
+                "message": {
+                  "type": "string",
+                  "example": "重設密碼失敗"
+                }
+              },
+              "xml": {
+                "name": "main"
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "Bearer": []
+          }
+        ]
+      }
+    },
+    "/user/{userId}/profile": {
+      "get": {
+        "tags": [
+          "User 會員"
+        ],
+        "summary": "取得指定會員資料",
+        "description": "取得指定會員資料",
+        "parameters": [
+          {
+            "name": "userId",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "authorization",
+            "in": "header",
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "回傳成功",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "status": {
+                  "type": "string",
+                  "example": "success"
+                },
+                "data": {
+                  "type": "object",
+                  "properties": {
+                    "_id": {
+                      "type": "string",
+                      "example": "62a4fc111573884df26234f5"
+                    },
+                    "name": {
+                      "type": "string",
+                      "example": "Carl"
+                    },
+                    "gender": {
+                      "type": "string",
+                      "example": "male"
+                    },
+                    "photo": {
+                      "type": "string",
+                      "example": "https://i.imgur.com/vpQY28H.jpg"
+                    },
+                    "email": {
+                      "type": "string",
+                      "example": "carl@mail.com"
+                    },
+                    "createdAt": {
+                      "type": "string",
+                      "example": "2024-02-23T13:31:49.730Z"
+                    },
+                    "updatedAt": {
+                      "type": "string",
+                      "example": "2024-02-23T13:33:47.114Z"
+                    }
+                  }
+                }
+              },
+              "xml": {
+                "name": "main"
+              }
+            }
+          },
+          "400": {
+            "description": "回傳失敗",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "status": {
+                  "type": "string",
+                  "example": "error"
+                },
+                "message": {
+                  "type": "string",
+                  "example": "取得指定會員資料失敗"
+                }
+              },
+              "xml": {
+                "name": "main"
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "Bearer": []
+          }
+        ]
+      },
+      "patch": {
+        "tags": [
+          "User 會員"
+        ],
+        "summary": "更新會員資訊",
+        "description": "更新會員資訊",
+        "parameters": [
+          {
+            "name": "userId",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "authorization",
+            "in": "header",
+            "type": "string"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "description": "資料格式",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "name": {
+                  "type": "string",
+                  "example": "Carl"
+                },
+                "gender": {
+                  "type": "string",
+                  "example": "male"
+                },
+                "avatar": {
+                  "type": "string",
+                  "example": "https://i.imgur.com/vpQY28H.jpg"
+                }
+              }
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "回傳成功",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "status": {
+                  "type": "string",
+                  "example": "success"
+                },
+                "data": {
+                  "type": "object",
+                  "properties": {
+                    "token": {
+                      "type": "string",
+                      "example": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYyYTRmYzExMTU3Mzg4NGRmMjYyMzRmNSIsImlhdCI6MTY1NTAyNDY3OCwiZXhwIjoxNjU1NjI5NDc4fQ.vMIJuAqPwiE6AbheNl6vZ00m1hIzb7PDCBRlGD0SNMA"
+                    },
+                    "user": {
+                      "type": "object",
+                      "properties": {
+                        "_id": {
+                          "type": "string",
+                          "example": "62a4fc111573884df26234f5"
+                        },
+                        "name": {
+                          "type": "string",
+                          "example": "Carl"
+                        },
+                        "avatar": {
+                          "type": "string",
+                          "example": "https://i.imgur.com/vpQY28H.jpg"
+                        },
+                        "gender": {
+                          "type": "string",
+                          "example": "male"
+                        },
+                        "email": {
+                          "type": "string",
+                          "example": "carl@mail.com"
+                        }
+                      }
+                    }
+                  }
+                }
+              },
+              "xml": {
+                "name": "main"
+              }
+            }
+          },
+          "400": {
+            "description": "回傳失敗",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "status": {
+                  "type": "string",
+                  "example": "error"
+                },
+                "message": {
+                  "type": "string",
+                  "example": "更新會員資訊失敗"
+                }
+              },
+              "xml": {
+                "name": "main"
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "Bearer": []
+          }
+        ]
+      }
+    },
+    "/users": {
+      "get": {
+        "tags": [
+          "User 會員 - 管理員"
+        ],
+        "summary": "取得所有會員",
+        "description": "取得所有會員",
+        "parameters": [
+          {
+            "name": "authorization",
+            "in": "header",
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "回傳成功",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "status": {
+                  "type": "string",
+                  "example": "success"
+                },
+                "data": {
+                  "type": "array",
+                  "items": {
+                    "type": "object",
+                    "properties": {
+                      "_id": {
+                        "type": "string",
+                        "example": "62a4fc111573884df26234f5"
+                      },
+                      "name": {
+                        "type": "string",
+                        "example": "Vance"
+                      },
+                      "avatar": {
+                        "type": "string",
+                        "example": "https://i.imgur.com/vpQY28H.jpg"
+                      },
+                      "gender": {
+                        "type": "string",
+                        "example": "male"
+                      },
+                      "email": {
+                        "type": "string",
+                        "example": "vance@mail.com"
+                      },
+                      "createdAt": {
+                        "type": "string",
+                        "example": "2024-02-20T05:09:00.504Z"
+                      },
+                      "updatedAt": {
+                        "type": "string",
+                        "example": "2024-02-20T05:43:06.290Z"
+                      }
+                    }
+                  }
+                }
+              },
+              "xml": {
+                "name": "main"
+              }
+            }
+          },
+          "400": {
+            "description": "回傳失敗",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "status": {
+                  "type": "string",
+                  "example": "error"
+                },
+                "message": {
+                  "type": "string",
+                  "example": "取得所有會員失敗"
+                }
+              },
+              "xml": {
+                "name": "main"
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "Bearer": []
+          }
+        ]
+      },
+      "delete": {
+        "tags": [
+          "User 會員 - 管理員"
+        ],
+        "summary": "刪除所有會員",
+        "description": "刪除所有會員，會同步刪除所有食譜",
+        "parameters": [
+          {
+            "name": "authorization",
+            "in": "header",
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "回傳成功",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "status": {
+                  "type": "string",
+                  "example": "success"
+                },
+                "data": {
+                  "type": "array",
+                  "items": {
+                    "type": "object",
+                    "properties": {
+                      "_id": {
+                        "type": "string",
+                        "example": "65d433ec0e39d8dcfd678a59"
+                      },
+                      "name": {
+                        "type": "string",
+                        "example": "admin"
+                      },
+                      "gender": {
+                        "type": "string",
+                        "example": "male"
+                      },
+                      "avatar": {
+                        "type": "string",
+                        "example": ""
+                      },
+                      "email": {
+                        "type": "string",
+                        "example": "admin@mail.com"
+                      },
+                      "createdAt": {
+                        "type": "string",
+                        "example": "2024-02-20T05:09:00.504Z"
+                      },
+                      "updatedAt": {
+                        "type": "string",
+                        "example": "2024-02-20T05:43:06.290Z"
+                      }
+                    }
+                  }
+                }
+              },
+              "xml": {
+                "name": "main"
+              }
+            }
+          },
+          "400": {
+            "description": "回傳失敗",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "status": {
+                  "type": "string",
+                  "example": "error"
+                },
+                "message": {
+                  "type": "string",
+                  "example": "刪除所有會員失敗"
+                }
+              },
+              "xml": {
+                "name": "main"
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "Bearer": []
+          }
+        ]
+      }
+    },
+    "/user/{userId}": {
+      "delete": {
+        "tags": [
+          "User 會員"
+        ],
+        "summary": "刪除指定會員",
+        "description": "刪除指定會員，會同步刪除指定會員所有食譜",
+        "parameters": [
+          {
+            "name": "userId",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "authorization",
+            "in": "header",
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "回傳成功",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "status": {
+                  "type": "string",
+                  "example": "success"
+                },
+                "data": {
+                  "type": "object",
+                  "properties": {
+                    "_id": {
+                      "type": "string",
+                      "example": "62a4fc111573884df26234f5"
+                    },
+                    "name": {
+                      "type": "string",
+                      "example": "Vance"
+                    },
+                    "avatar": {
+                      "type": "string",
+                      "example": "https://i.imgur.com/vpQY28H.jpg"
+                    },
+                    "gender": {
+                      "type": "string",
+                      "example": "male"
+                    },
+                    "email": {
+                      "type": "string",
+                      "example": "vance@mail.com"
+                    },
+                    "createdAt": {
+                      "type": "string",
+                      "example": "2024-02-20T05:09:00.504Z"
+                    },
+                    "updatedAt": {
+                      "type": "string",
+                      "example": "2024-02-20T05:43:06.290Z"
+                    }
+                  }
+                }
+              },
+              "xml": {
+                "name": "main"
+              }
+            }
+          },
+          "400": {
+            "description": "回傳失敗",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "status": {
+                  "type": "string",
+                  "example": "error"
+                },
+                "message": {
+                  "type": "string",
+                  "example": "刪除指定會員失敗"
+                }
+              },
+              "xml": {
+                "name": "main"
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "Bearer": []
+          }
+        ]
+      }
+    },
+    "/upload": {
+      "post": {
+        "tags": [
+          "Upload 上傳"
+        ],
+        "summary": "上傳圖片",
+        "description": "上傳圖片",
+        "parameters": [
+          {
+            "name": "authorization",
+            "in": "header",
+            "type": "string"
+          },
+          {
+            "name": "type",
+            "in": "query",
+            "type": "string",
+            "description": "如果為 avatar 則為大頭照"
+          },
+          {
+            "name": "img",
+            "in": "formData",
+            "type": "file",
+            "required": true,
+            "description": "圖片"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "回傳成功",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "status": {
+                  "type": "string",
+                  "example": "success"
+                },
+                "data": {
+                  "type": "string",
+                  "example": "https://i.imgur.com/vpQY28H.jpg"
+                }
+              },
+              "xml": {
+                "name": "main"
+              }
+            }
+          },
+          "400": {
+            "description": "回傳失敗",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "status": {
+                  "type": "string",
+                  "example": "error"
+                },
+                "message": {
+                  "type": "string",
+                  "example": "上傳圖片失敗"
+                }
+              },
+              "xml": {
+                "name": "main"
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "Bearer": []
+          }
+        ]
+      }
+    }
+  }
+}
