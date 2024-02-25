@@ -58,11 +58,19 @@ app.use((err, req, res, next) => {
 
   // production 模式
 
-  // jwt 錯誤
+  // JWT 錯誤 - token 超過時效
   if (err.name === "TokenExpiredError") {
     err.isOperational = true;
     err.statusCode = 401;
     err.message = "使用者已登出，請重新登入";
+    return resErrorProd(err, res);
+  }
+
+  // JWT 錯誤 - token 錯誤
+  if (err.name === "JsonWebTokenError") {
+    err.isOperational = true;
+    err.statusCode = 401;
+    err.message = "登入錯誤，請重新登入";
     return resErrorProd(err, res);
   }
 
