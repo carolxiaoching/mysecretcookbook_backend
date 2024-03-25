@@ -6,7 +6,7 @@ const doc = {
   },
   host:
     process.env.NODE_ENV === "production"
-      ? "https://mysecretcookbook_backend.onrender.com"
+      ? "mysecretcookbook-backend.onrender.com"
       : "localhost:3000",
   schemes: ["http", "https"],
   securityDefinitions: {
